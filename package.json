@@ -1,27 +1,25 @@
 {
-  "_from": "homebridge-Mclimate",
+  "_from": "git+https://github.com/JordanZ25/homebridge-mclimate.git",
   "_id": "homebridge-mclimate@0.0.3",
   "_inBundle": false,
-  "_integrity": "sha1-yuoONqekkUW0co0+XuBcgMdgqQY=",
+  "_integrity": "sha1-F4PE2WJKM+R+77TlaPtGzloEIfs=",
   "_location": "/homebridge-mclimate",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "homebridge-mclimate",
-    "name": "homebridge-mclimate",
-    "escapedName": "homebridge-mclimate",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
+    "type": "git",
+    "raw": "git+https://github.com/JordanZ25/homebridge-mclimate.git",
+    "rawSpec": "git+https://github.com/JordanZ25/homebridge-mclimate.git",
+    "saveSpec": "git+https://github.com/JordanZ25/homebridge-mclimate.git",
+    "fetchSpec": "https://github.com/JordanZ25/homebridge-mclimate.git",
+    "gitCommittish": "master"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "https://registry.npmjs.org/homebridge-mclimate/-/homebridge-mclimate-0.0.3.tgz",
+  "_resolved": "git+https://github.com/JordanZ25/homebridge-mclimate.git#60ac871370cac3092e749cfb64ed2ee6d46fbcbb",
   "_shasum": "caea0e36a7a49145b4728d3e5ee05c80c760a906",
-  "_spec": "homebridge-mclimate",
-  "_where": "/Users/mac",
+  "_spec": "git+https://github.com/JordanZ25/homebridge-mclimate.git",
+  "_where": "/Users/mac/Documents/mc/homebridge-mclimate",
   "bundleDependencies": false,
   "dependencies": {
     "axios": "^0.18.0",
