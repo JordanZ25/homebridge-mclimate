@@ -13,50 +13,46 @@ class SmartPlugAccessory {
 
 
     }
+    getPowerOn(callback) {
+        var plugName = this.plugName
+        this.apiClient.get("controllers/" + this.serial_number, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.access_token
+            }
+        }).then(function (response) {
+            var controller = response.data.controller;
+            var relay_state = controller.relay_state;
+            var binaryState = relay_state ? 1 : 0;
+            var state = relay_state ? 'on' : 'off';
+            callback(null, binaryState);
+        })
+    }
+    setPowerOn(powerOn, callback) {
 
-    getServices() {
-        let smartPlugService = new Service.Outlet(this.name);
-
-        let getPowerOn = (callback) => {
-            var plugName = this.plugName
-            this.apiClient.get("controllers/" + this.serial_number, {
+        var state = powerOn ? 'on' : 'off';
+        var plugName = this.plugName
+        callback(null);
+        this.apiClient.post("provider/send", {
+            "serial_number": this.serial_number,
+            "command": "switch_on_off",
+            "state": state
+        }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + this.access_token
                 }
             }).then(function (response) {
-                var controller = response.data.controller;
-                var relay_state = controller.relay_state;
-                var binaryState = relay_state ? 1 : 0;
-                var state = relay_state ? 'on' : 'off';
-                // console.log("Power state for the '%s' is %s", plugName, state);
-                callback(null, binaryState);
+                console.log("Set power state on the '%s' to %s", plugName, state);
             })
-        }
-        let setPowerOn = (powerOn, callback) => {
+    }
 
-            // console.log(powerOn);
-            // this.binaryState = powerOn ? 'on' : 'off'; 
-            var state = powerOn ? 'on' : 'off';
-            var plugName = this.plugName
-            callback(null);
-            this.apiClient.post("provider/send", {
-                "serial_number": this.serial_number,
-                "command": "switch_on_off",
-                "state": state
-            }, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + this.access_token
-                    }
-                }).then(function (response) {
-                    console.log("Set power state on the '%s' to %s", plugName, state);
-                })
-        }
 
+    getServices() {
+        let smartPlugService = new Service.Outlet(this.name);
         smartPlugService.getCharacteristic(Characteristic.On)
-            .on('get', getPowerOn)
-            .on('set', setPowerOn);
+            .on('get', this.getPowerOn.bind(this))
+            .on('set', this.setPowerOn.bind(this));
         return [smartPlugService];
     }
 
