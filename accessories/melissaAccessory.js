@@ -25,7 +25,7 @@ class MelissaAccessory {
                 callback(null, temp)
             })
     }
-    setTargetTemperature = (value, callback) => {
+    setTargetTemperature(value, callback) {
         this.apiClient.get('controllers/' + this.serial_number, {
             headers: {
                 'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ class MelissaAccessory {
 
     getServices() {
         let melissaService = new Service.Thermostat(this.name);
-        
+
         melissaService.getCharacteristic(Characteristic.CurrentTemperature)
             .on('get', this.getCurrentTemperature.bind(this));
 
